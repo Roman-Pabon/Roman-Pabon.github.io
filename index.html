@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(255, 116, 139); /* Cambia el color de fondo a rosa */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding-top: 100px; /* Espacio para centrar verticalmente */
+            margin: 0; /* Eliminar el margen predeterminado del cuerpo */
+            display: flex; /* Utilizar flexbox para centrar verticalmente */
+            justify-content: center; /* Centrar horizontalmente */
+            align-items: center; /* Centrar verticalmente */
+            min-height: 100vh; /* Utilizar el 100% de la altura de la ventana */
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 80%; /* Ancho máximo del contenedor */
+        }
+        button {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+            transition: transform 0.3s; /* Agregar transición para un efecto suave */
+        }
+        button:hover {
+            background-color: #e60000;
+        }
+        .si-ampliado {
+            transform: scale(1.2); /* Aumentar el tamaño del botón */
+        }
+        #video {
+            width: 80%; /* Ajustar el ancho del video */
+            height: auto; /* Mantener la relación de aspecto */
+            display: none; /* Ocultar el video por defecto */
+        }
+        #background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Colocar el video detrás de todo */
+            display: none; /* Ocultar el video de fondo por defecto */
+        }
+        #background-audio {
+            display: none; /* Ocultar el audio por defecto */
+        }
+        #mensaje {
+            display: none; /* Ocultar el elemento por defecto */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .fila {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .columna {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 5px;
+        }
+        #mensaje img {
+            width: 100px; /* Tamaño de las imágenes */
+            height: 100px;
+            border-radius: 10px;
+            margin: 5px; /* Espacio entre las imágenes */
+            animation: palpitar 1s infinite alternate; /* Animación de palpitación */
+        }
+        #mensaje h2 {
+            margin-top: 20px;
+            animation: palpitar 1s infinite alternate; /* Animación de palpitación */
+        }
+        @keyframes palpitar {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop>
+        <source src="0217.mp4" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+    </video>
+
+    <audio id="background-audio" autoplay loop>
+        <source src="y2mate (mp3cut.net) (1).mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <div class="container" id="container">
+        <h1 id="question">¿Quieres ser mi San Valentín?</h1>
+        <video id="video" style="display: none;" autoplay loop>
+            <source src="2024-02-13 20-03-01 - Trim.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
+        <audio id="audio" src="y2mate.com - Can I Call You Tonight Edit.mp3" preload="auto" style="display: none;" loop></audio>
+        <br><br>
+        <button onclick="aceptar()" id="siButton">Sí</button>
+        <button onclick="rechazar()">No</button>
+        <button onclick="parar()" id="detener" style="display:none;">Detener</button>
+        <div id="mensaje">
+            <div class="fila">
+                <img src="photo_5071405020301339674_y.jpg" alt="Imagen 1">
+                <img src="photo_5071405020301339675_y.jpg" alt="Imagen 2">
+                <img src="photo_5071405020301339676_y.jpg" alt="Imagen 3">
+            </div>
+            <div class="fila">
+                <img src="photo_5071405020301339680_y.jpg" alt="Imagen 4">
+                <h2>TE AMO MUCHO</h2>
+                <img src="photo_5071405020301339679_y.jpg" alt="Imagen 5">
+            </div>
+            <div class="fila">
+                <img src="photo_5071405020301339677_y.jpg" alt="Imagen 6">
+                <img src="photo_5071405020301339678_y.jpg" alt="Imagen 7">
+                <img src="photo_5071405020301339681_y.jpg" alt="Imagen 8">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var contadorNo = 0;
+        var mensajes = [
+            "No seas así, por favor :(",
+            "Bueno, si quieres, sigue dándole al no D;",
+            "Era mentira, apretale al SIIII",
+            "Puedes seguir intentando, pero no lo lograrás :)"
+        ];
+
+        function aceptar() {
+            var video = document.getElementById('video');
+            var audio = document.getElementById('audio');
+            var container = document.getElementById('container');
+            var question = document.getElementById('question');
+
+            video.style.display = 'block'; // Mostrar el video
+            video.play(); // Reproducir el video
+            audio.play(); // Reproducir el audio
+
+            container.removeChild(question); // Eliminar la pregunta
+
+            document.getElementById('siButton').style.display = 'none'; // Ocultar el botón "Sí"
+            document.getElementsByTagName('button')[1].style.display = 'none'; // Ocultar el botón "No"
+            document.getElementById('detener').style.display = 'inline'; // Mostrar el botón "Detener"
+
+            // Hacer más grande el video
+            video.style.width = '100%';
+            video.style.height = 'auto';
+        }
+
+        function parar() {
+            var video = document.getElementById('video');
+            var audio = document.getElementById('audio');
+            var backgroundVideo = document.getElementById('background-video');
+            var backgroundAudio = document.getElementById('background-audio');
+            var mensaje = document.getElementById('mensaje');
+
+            video.pause(); // Pausar el video
+            video.style.display = 'none'; // Ocultar el video
+            audio.pause(); // Pausar el audio
+            backgroundAudio.play(); // Reproducir el audio de fondo
+            backgroundVideo.style.display = 'block'; // Mostrar el video de fondo
+            backgroundAudio.style.display = 'block'; // Mostrar el audio de fondo
+            document.getElementById('detener').style.display = 'none'; // Ocultar el botón "Detener"
+            mensaje.style.display = 'flex'; // Mostrar el mensaje
+        }
+
+        function rechazar() {
+            var mensaje = mensajes[contadorNo % mensajes.length];
+            contadorNo++;
+            document.getElementById('siButton').innerText = mensaje;
+            if (contadorNo >= mensajes.length) {
+                document.getElementById('siButton').classList.add('si-ampliado');
+            }
+        }
+    </script>
+</body>
+</html>
